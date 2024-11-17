@@ -1,6 +1,7 @@
 package com.example.CRUD_application.controller;
 
-import com.example.CRUD_application.model.Student; 
+import com.example.CRUD_application.model.Student;
+import com.example.CRUD_application.repository.StudentRepository;
 import com.example.CRUD_application.service.StudentService; 
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.http.HttpStatus; 
@@ -14,8 +15,28 @@ import java.util.List;
 @CrossOrigin(origins = "*") 
 public class StudentCotroller {
 
-    @Autowired 
+   @Autowired 
     private StudentService studentService; 
+    //---------------------------------------
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @GetMapping("/enrolled/{year}")
+    public List<Student> getStudentsByYear(@PathVariable int year) {
+        return studentRepository.findByYearOfEnrollment(year);
+    }
+    @GetMapping("/{id}/department")
+    public String getStudentDepartment(@PathVariable Long id) {
+    return studentRepository.findDepartmentByStudentId(id);
+}
+    @DeleteMapping("/enrolled/{year}")
+    public void deleteStudentsByYear(@PathVariable int year) {
+    studentRepository.deleteByYearOfEnrollment(year);
+    }
+    //---------------------------------------
+    
+    
+    
     @PostMapping 
     public ResponseEntity<Student> saveStudent(@RequestBody Student 
     student){ 
@@ -43,5 +64,7 @@ public class StudentCotroller {
         @RequestBody Student student){ 
             return new 
             ResponseEntity<Student>(studentService.updateStudent(student,id),HttpStatus.OK); 
-            } 
             }
+        }
+    
+            

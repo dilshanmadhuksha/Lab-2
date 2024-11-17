@@ -51,4 +51,9 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(existingStudent); 
         return existingStudent; 
     }
+
+    @Override
+    public Object getStudentsByYearOfEnrollment(int year) { 
+        throw new UnsupportedOperationException("Unimplemented method 'getStudentsByYearOfEnrollment'");
+    }
 }

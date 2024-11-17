@@ -7,4 +7,5 @@ public interface StudentService {
     List<Student> getAllStudent();
     Student getStudentByID(long id);
     Student updateStudent(Student student,long id);
+    Object getStudentsByYearOfEnrollment(int year);   
 }
